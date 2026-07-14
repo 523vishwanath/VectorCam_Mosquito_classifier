@@ -1,0 +1,20 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Model weights — large binary, uncomment the line below to exclude from git
+# and use Git LFS or a release asset instead. Left commented by default so the
+# file IS tracked normally unless you decide otherwise.
+# mosquito_deploy/*.pt
+
+# Environment / secrets — never commit API keys
+.env
+*.key
+
+# Calibration script output (regenerate anytime by rerunning scripts/calibration_check.py)
+calibration_results.csv

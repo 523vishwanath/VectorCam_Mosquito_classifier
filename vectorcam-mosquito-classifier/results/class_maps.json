@@ -1,0 +1,16 @@
+{
+  "species": {
+    "aedes_aegypti": 0,
+    "anopheles_albimanus": 1,
+    "anopheles_arabiensis": 2,
+    "anopheles_atroparvus": 3,
+    "anopheles_coluzzi": 4,
+    "anopheles_farauti": 5,
+    "anopheles_freeborni": 6
+  },
+  "sex": {
+    "female": 0,
+    "male": 1
+  },
+  "strain": {}
+}
