@@ -33,332 +33,176 @@
     color: var(--card);
     font-family: 'JetBrains Mono', monospace;
     min-height: 100vh;
-    padding: 0;
   }
 
-  .wrap {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 64px 24px 96px;
-  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 56px 20px 96px; }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
   }
 
-  /* ---------- Header ---------- */
   .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--moss);
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--moss); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
   }
-  .eyebrow::before {
-    content: "";
-    width: 24px;
-    height: 1px;
-    background: var(--moss);
-    display: inline-block;
-  }
+  .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--moss); }
 
   h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-style: italic;
-    font-size: 42px;
-    line-height: 1.08;
-    margin: 0 0 18px;
-    color: var(--card);
+    font-family: 'Fraunces', serif; font-weight: 500; font-style: italic;
+    font-size: 40px; line-height: 1.1; margin: 0 0 18px; color: var(--card);
   }
-  h1 em {
-    font-style: normal;
-    color: var(--amber-bright);
-  }
+  h1 em { font-style: normal; color: var(--amber-bright); }
 
   .lede {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    max-width: 52ch;
-    margin: 0 0 48px;
+    font-size: 14px; line-height: 1.7; color: var(--ink-soft);
+    max-width: 52ch; margin: 0 0 40px;
   }
   .lede strong { color: var(--card); font-weight: 500; }
 
-  /* ---------- Upload zone ---------- */
+  .input-row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+
+  .input-btn {
+    flex: 1; min-width: 160px;
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    padding: 16px 20px;
+    border: 1px solid var(--line); border-radius: 2px;
+    background: transparent; color: var(--card);
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.15s ease;
+  }
+  .input-btn:hover { border-color: var(--amber); background: rgba(193,134,59,0.05); }
+  .input-btn:focus-visible { outline: 2px solid var(--amber-bright); outline-offset: 3px; }
+  .input-btn svg { width: 16px; height: 16px; opacity: 0.7; }
+
+  #cameraBtn { display: none; }
+  body.has-camera #cameraBtn { display: flex; }
+
+  input[type="file"] { display: none; }
+
   .dropzone {
-    border: 1px dashed var(--line);
-    border-radius: 2px;
-    padding: 48px 24px;
-    text-align: center;
-    cursor: pointer;
+    border: 1px dashed var(--line); border-radius: 2px;
+    padding: 40px 24px; text-align: center; cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
-    position: relative;
   }
   .dropzone:hover, .dropzone.drag {
-    border-color: var(--amber);
-    background: rgba(193,134,59,0.05);
+    border-color: var(--amber); background: rgba(193,134,59,0.05);
   }
-  .dropzone:focus-visible {
-    outline: 2px solid var(--amber-bright);
-    outline-offset: 4px;
-  }
-  .dropzone input { display: none; }
+  .dropzone:focus-visible { outline: 2px solid var(--amber-bright); outline-offset: 4px; }
+  .dz-icon { width: 30px; height: 30px; margin: 0 auto 14px; opacity: 0.5; }
+  .dz-label { font-size: 13px; color: var(--card); margin-bottom: 6px; }
+  .dz-sub { font-size: 11px; color: var(--ink-soft); }
 
-  .dz-icon {
-    width: 34px; height: 34px;
-    margin: 0 auto 16px;
-    opacity: 0.55;
-  }
+  .queue { display: none; margin-top: 24px; }
+  .queue.show { display: block; }
 
-  .dz-label {
-    font-size: 13px;
-    color: var(--card);
-    margin-bottom: 6px;
-  }
-  .dz-sub {
-    font-size: 11px;
-    color: var(--ink-soft);
-    letter-spacing: 0.02em;
+  .queue-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 14px; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);
   }
 
-  .preview-wrap {
-    display: none;
-    margin-top: 20px;
-  }
-  .preview-wrap.show { display: block; }
-  .preview-img {
-    width: 100%;
-    max-height: 320px;
-    object-fit: cover;
-    border-radius: 2px;
-    display: block;
-    filter: sepia(8%) saturate(92%);
+  .thumbs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .thumb {
+    width: 68px; height: 68px; border-radius: 2px; object-fit: cover;
+    filter: sepia(8%) saturate(92%); border: 1px solid var(--line);
   }
 
-  .actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-  }
+  .actions { display: flex; gap: 12px; }
 
   button {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 13px 22px;
-    border-radius: 2px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: all 0.15s ease;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 13px 22px; border-radius: 2px; border: 1px solid transparent;
+    cursor: pointer; transition: all 0.15s ease;
   }
-  .btn-primary {
-    background: var(--amber);
-    color: var(--drawer-deep);
-    font-weight: 600;
-  }
+  .btn-primary { background: var(--amber); color: var(--drawer-deep); font-weight: 600; }
   .btn-primary:hover:not(:disabled) { background: var(--amber-bright); }
   .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-ghost { background: transparent; border-color: var(--line); color: var(--ink-soft); }
+  .btn-ghost:hover:not(:disabled) { border-color: var(--card); color: var(--card); }
+  .btn-ghost:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .btn-ghost {
-    background: transparent;
-    border-color: var(--line);
-    color: var(--ink-soft);
-  }
-  .btn-ghost:hover { border-color: var(--card); color: var(--card); }
-
-  /* ---------- Loading ---------- */
-  .status {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
-    font-size: 12px;
-    color: var(--moss);
-  }
-  .status.show { display: flex; }
-  .pulse {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--moss);
-    animation: pulse 1.1s ease-in-out infinite;
-  }
+  .progress { display: none; align-items: center; gap: 10px; margin-top: 20px; font-size: 12px; color: var(--moss); }
+  .progress.show { display: flex; }
+  .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--moss); animation: pulse 1.1s ease-in-out infinite; }
   @keyframes pulse {
     0%, 100% { opacity: 0.3; transform: scale(0.8); }
     50% { opacity: 1; transform: scale(1.1); }
   }
 
   .error-box {
-    display: none;
-    margin-top: 20px;
-    padding: 14px 16px;
-    border-left: 2px solid var(--error);
-    background: rgba(181,86,60,0.08);
-    font-size: 12px;
-    color: #E0A695;
-    line-height: 1.6;
+    display: none; margin-top: 18px; padding: 13px 15px;
+    border-left: 2px solid var(--error); background: rgba(181,86,60,0.08);
+    font-size: 12px; color: #E0A695; line-height: 1.6;
   }
   .error-box.show { display: block; }
 
-  /* ---------- Specimen card (the signature element) ---------- */
+  #results { margin-top: 36px; }
+
   .specimen {
-    display: none;
-    margin-top: 40px;
-    background: var(--card);
-    color: var(--ink);
-    border-radius: 1px;
-    box-shadow: 0 1px 0 var(--card-shadow), 0 20px 40px -20px rgba(0,0,0,0.6);
-    position: relative;
-    overflow: hidden;
-  }
-  .specimen.show {
-    display: block;
-    animation: pin-in 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+    background: var(--card); color: var(--ink);
+    border-radius: 1px; margin-bottom: 20px;
+    box-shadow: 0 1px 0 var(--card-shadow), 0 20px 40px -22px rgba(0,0,0,0.6);
+    position: relative; overflow: hidden;
+    animation: pin-in 0.45s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
   @keyframes pin-in {
     from { opacity: 0; transform: translateY(10px) scale(0.99); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
-
   .specimen::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: repeating-linear-gradient(90deg, var(--amber) 0 10px, transparent 10px 16px);
   }
+  .specimen.failed::before { background: var(--error); }
 
-  .specimen-inner { padding: 32px 30px 28px; }
+  .specimen-inner { padding: 26px 26px 24px; display: flex; gap: 22px; }
+  @media (max-width: 560px) { .specimen-inner { flex-direction: column; gap: 16px; } }
 
-  .specimen-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 4px;
+  .specimen-thumb {
+    width: 96px; height: 96px; flex-shrink: 0;
+    object-fit: cover; border-radius: 2px;
+    filter: sepia(10%) saturate(90%);
   }
+  @media (max-width: 560px) { .specimen-thumb { width: 100%; height: 160px; } }
 
-  .specimen-eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
+  .specimen-body { flex: 1; min-width: 0; }
 
-  .specimen-id {
-    font-size: 10px;
-    color: var(--ink-soft);
-  }
+  .specimen-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .specimen-eyebrow { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+  .specimen-file { font-size: 10px; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 150px; }
 
   .species-name {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 1.15;
-    margin: 10px 0 4px;
-    color: var(--ink);
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 500;
+    font-size: 26px; line-height: 1.15; margin: 8px 0 3px; color: var(--ink);
   }
+  .species-genus { font-size: 11px; color: var(--ink-soft); margin-bottom: 18px; }
 
-  .species-common {
-    font-size: 12px;
-    color: var(--ink-soft);
-    margin-bottom: 22px;
-  }
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; padding-top: 16px; border-top: 1px solid rgba(38,36,26,0.12); }
+  .field-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 5px; }
+  .field-value { font-size: 14px; color: var(--ink); text-transform: capitalize; font-weight: 500; }
 
-  .fields {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px 24px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(38,36,26,0.12);
-  }
+  .conf-bar-track { height: 4px; background: rgba(38,36,26,0.1); border-radius: 2px; margin-top: 7px; overflow: hidden; }
+  .conf-bar-fill { height: 100%; background: var(--moss); border-radius: 2px; }
+  .conf-bar-fill.low { background: var(--amber); }
 
-  .field-label {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 6px;
-  }
-  .field-value {
-    font-size: 15px;
-    color: var(--ink);
-    text-transform: capitalize;
-    font-weight: 500;
-  }
-
-  .conf-bar-track {
-    height: 4px;
-    background: rgba(38,36,26,0.1);
-    border-radius: 2px;
-    margin-top: 8px;
-    overflow: hidden;
-  }
-  .conf-bar-fill {
-    height: 100%;
-    background: var(--moss);
-    border-radius: 2px;
-    width: 0%;
-    transition: width 0.6s cubic-bezier(0.2,0.8,0.3,1);
-  }
-
-  .breakdown {
-    margin-top: 24px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(38,36,26,0.12);
-  }
-  .breakdown-title {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 12px;
-  }
-  .breakdown-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 12px;
-    margin-bottom: 7px;
-  }
-  .breakdown-name {
-    width: 150px;
-    flex-shrink: 0;
-    font-style: italic;
-    color: var(--ink-soft);
-  }
+  .breakdown { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(38,36,26,0.12); }
+  .breakdown-title { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+  .breakdown-row { display: flex; align-items: center; gap: 9px; font-size: 11px; margin-bottom: 6px; }
+  .breakdown-name { width: 140px; flex-shrink: 0; font-style: italic; color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .breakdown-row.top .breakdown-name { color: var(--ink); font-weight: 500; }
-  .breakdown-track {
-    flex: 1;
-    height: 3px;
-    background: rgba(38,36,26,0.08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .breakdown-fill {
-    height: 100%;
-    background: var(--amber);
-    opacity: 0.65;
-  }
+  .breakdown-track { flex: 1; height: 3px; background: rgba(38,36,26,0.08); border-radius: 2px; overflow: hidden; }
+  .breakdown-fill { height: 100%; background: var(--amber); opacity: 0.6; }
   .breakdown-row.top .breakdown-fill { opacity: 1; }
-  .breakdown-pct {
-    width: 40px;
-    text-align: right;
-    color: var(--ink-soft);
-    font-size: 11px;
-  }
+  .breakdown-pct { width: 36px; text-align: right; color: var(--ink-soft); font-size: 10px; }
+
+  .fail-msg { font-size: 12px; color: var(--error); line-height: 1.6; }
 
   footer {
-    margin-top: 56px;
-    font-size: 11px;
-    color: var(--ink-soft);
-    line-height: 1.7;
-    border-top: 1px solid var(--line);
-    padding-top: 20px;
+    margin-top: 52px; font-size: 11px; color: var(--ink-soft);
+    line-height: 1.7; border-top: 1px solid var(--line); padding-top: 20px;
   }
   footer a { color: var(--moss); text-decoration: none; }
   footer a:hover { color: var(--amber-bright); }
@@ -371,62 +215,56 @@
   <h1>Photograph a mosquito.<br>Read its <em>species</em> and sex.</h1>
   <p class="lede">
     A two-head classifier trained on CDC/MR4 reference specimens across
-    <strong>7 species</strong> and <strong>3 genera</strong>. Built to validate the
-    identification approach used in field malaria-vector surveillance tools.
+    <strong>7 species</strong> and <strong>3 genera</strong>. Upload one specimen or a
+    whole batch.
   </p>
 
-  <label class="dropzone" id="dropzone" tabindex="0">
-    <input type="file" id="fileInput" accept="image/*">
+  <div class="input-row">
+    <button class="input-btn" id="cameraBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z" stroke-linejoin="round"/>
+        <circle cx="12" cy="12.5" r="3.5"/>
+      </svg>
+      Take a photo
+    </button>
+    <button class="input-btn" id="browseBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M4 6a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z" stroke-linejoin="round"/>
+      </svg>
+      Choose images
+    </button>
+  </div>
+
+  <input type="file" id="fileInput" accept="image/*" multiple>
+  <input type="file" id="cameraInput" accept="image/*" capture="environment">
+
+  <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Drop specimen images here">
     <svg class="dz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
       <path d="M12 3v13M12 3l-4 4M12 3l4 4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <div class="dz-label">Drop a specimen photo, or click to browse</div>
-    <div class="dz-sub">JPG or PNG · single mosquito, clear background works best</div>
-    <div class="preview-wrap" id="previewWrap">
-      <img class="preview-img" id="previewImg" alt="Uploaded specimen preview">
-    </div>
-  </label>
-
-  <div class="actions" id="actions" style="display:none;">
-    <button class="btn-primary" id="identifyBtn">Identify specimen</button>
-    <button class="btn-ghost" id="clearBtn">Clear</button>
+    <div class="dz-label">Or drop specimen photos here</div>
+    <div class="dz-sub">JPG or PNG · one mosquito per image works best</div>
   </div>
 
-  <div class="status" id="status">
+  <div class="queue" id="queue">
+    <div class="queue-header">
+      <span id="queueCount">0 specimens queued</span>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="actions">
+      <button class="btn-primary" id="identifyBtn">Identify all</button>
+      <button class="btn-ghost" id="clearBtn">Clear</button>
+    </div>
+  </div>
+
+  <div class="progress" id="progress">
     <div class="pulse"></div>
-    <span id="statusText">Reading morphological features…</span>
+    <span id="progressText">Reading morphological features…</span>
   </div>
 
   <div class="error-box" id="errorBox"></div>
 
-  <div class="specimen" id="specimen">
-    <div class="specimen-inner">
-      <div class="specimen-row">
-        <div class="specimen-eyebrow">Identification result</div>
-        <div class="specimen-id" id="specimenTime"></div>
-      </div>
-      <div class="species-name" id="speciesName">—</div>
-      <div class="species-common" id="speciesGenus">—</div>
-
-      <div class="fields">
-        <div>
-          <div class="field-label">Sex</div>
-          <div class="field-value" id="sexValue">—</div>
-          <div class="conf-bar-track"><div class="conf-bar-fill" id="sexBar"></div></div>
-        </div>
-        <div>
-          <div class="field-label">Species confidence</div>
-          <div class="field-value" id="speciesConf">—</div>
-          <div class="conf-bar-track"><div class="conf-bar-fill" id="speciesBar"></div></div>
-        </div>
-      </div>
-
-      <div class="breakdown">
-        <div class="breakdown-title">Full species probability</div>
-        <div id="breakdownList"></div>
-      </div>
-    </div>
-  </div>
+  <div id="results"></div>
 
   <footer>
     EfficientNet-B0, two-head classifier · species &amp; sex trained jointly with
@@ -436,155 +274,213 @@
 </div>
 
 <script>
-  // ---- Point this at your deployed API ----
   const API_URL = "https://mosquito-classifier-207189004007.us-central1.run.app";
 
-  const dropzone   = document.getElementById('dropzone');
-  const fileInput  = document.getElementById('fileInput');
-  const previewWrap = document.getElementById('previewWrap');
-  const previewImg = document.getElementById('previewImg');
-  const actions    = document.getElementById('actions');
-  const identifyBtn = document.getElementById('identifyBtn');
-  const clearBtn   = document.getElementById('clearBtn');
-  const statusEl   = document.getElementById('status');
-  const statusText = document.getElementById('statusText');
-  const errorBox   = document.getElementById('errorBox');
-  const specimen   = document.getElementById('specimen');
+  const fileInput    = document.getElementById('fileInput');
+  const cameraInput  = document.getElementById('cameraInput');
+  const browseBtn    = document.getElementById('browseBtn');
+  const cameraBtn    = document.getElementById('cameraBtn');
+  const dropzone     = document.getElementById('dropzone');
+  const queue        = document.getElementById('queue');
+  const queueCount   = document.getElementById('queueCount');
+  const thumbs       = document.getElementById('thumbs');
+  const identifyBtn  = document.getElementById('identifyBtn');
+  const clearBtn     = document.getElementById('clearBtn');
+  const progress     = document.getElementById('progress');
+  const progressText = document.getElementById('progressText');
+  const errorBox     = document.getElementById('errorBox');
+  const results      = document.getElementById('results');
 
-  let currentFile = null;
+  let files = [];
 
-  const statusMessages = [
-    "Reading morphological features…",
-    "Comparing wing venation patterns…",
-    "Cross-referencing reference specimens…",
-    "Finalizing identification…"
-  ];
+  // Show the camera button only on touch devices, where a rear camera is likely
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    document.body.classList.add('has-camera');
+  }
 
+  // --- Input triggers. Each element has exactly ONE handler, so no double-fire. ---
+  browseBtn.addEventListener('click', () => fileInput.click());
+  cameraBtn.addEventListener('click', () => cameraInput.click());
   dropzone.addEventListener('click', () => fileInput.click());
   dropzone.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
   });
 
-  ['dragover', 'dragenter'].forEach(evt =>
-    dropzone.addEventListener(evt, (e) => { e.preventDefault(); dropzone.classList.add('drag'); })
-  );
-  ['dragleave', 'drop'].forEach(evt =>
-    dropzone.addEventListener(evt, (e) => { e.preventDefault(); dropzone.classList.remove('drag'); })
-  );
-  dropzone.addEventListener('drop', (e) => {
-    const file = e.dataTransfer.files[0];
-    if (file) handleFile(file);
-  });
-
   fileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) handleFile(file);
+    addFiles(Array.from(e.target.files));
+    e.target.value = '';   // reset so picking the same file again still fires change
+  });
+  cameraInput.addEventListener('change', (e) => {
+    addFiles(Array.from(e.target.files));
+    e.target.value = '';
   });
 
-  function handleFile(file) {
-    if (!file.type.startsWith('image/')) return;
-    currentFile = file;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      previewImg.src = e.target.result;
-      previewWrap.classList.add('show');
-      actions.style.display = 'flex';
-      specimen.classList.remove('show');
-      errorBox.classList.remove('show');
-    };
-    reader.readAsDataURL(file);
+  // --- Drag and drop ---
+  ['dragover','dragenter'].forEach(evt =>
+    dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.add('drag'); })
+  );
+  ['dragleave','drop'].forEach(evt =>
+    dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.remove('drag'); })
+  );
+  dropzone.addEventListener('drop', e => addFiles(Array.from(e.dataTransfer.files)));
+
+  function addFiles(newFiles) {
+    const images = newFiles.filter(f => f.type.startsWith('image/'));
+    if (!images.length) return;
+    files = files.concat(images);
+    renderQueue();
+    errorBox.classList.remove('show');
+  }
+
+  function renderQueue() {
+    if (!files.length) { queue.classList.remove('show'); return; }
+
+    queue.classList.add('show');
+    queueCount.textContent = `${files.length} specimen${files.length === 1 ? '' : 's'} queued`;
+    thumbs.innerHTML = '';
+
+    files.forEach(file => {
+      const img = document.createElement('img');
+      img.className = 'thumb';
+      img.alt = file.name;
+      const reader = new FileReader();
+      reader.onload = e => { img.src = e.target.result; };
+      reader.readAsDataURL(file);
+      thumbs.appendChild(img);
+    });
   }
 
   clearBtn.addEventListener('click', () => {
-    currentFile = null;
-    fileInput.value = '';
-    previewWrap.classList.remove('show');
-    actions.style.display = 'none';
-    specimen.classList.remove('show');
+    files = [];
+    renderQueue();
+    results.innerHTML = '';
     errorBox.classList.remove('show');
-    statusEl.classList.remove('show');
+    progress.classList.remove('show');
   });
 
   identifyBtn.addEventListener('click', async () => {
-    if (!currentFile) return;
+    if (!files.length) return;
 
+    results.innerHTML = '';
     errorBox.classList.remove('show');
-    specimen.classList.remove('show');
-    statusEl.classList.add('show');
+    progress.classList.add('show');
     identifyBtn.disabled = true;
+    clearBtn.disabled = true;
 
-    let msgIndex = 0;
-    statusText.textContent = statusMessages[0];
-    const msgInterval = setInterval(() => {
-      msgIndex = (msgIndex + 1) % statusMessages.length;
-      statusText.textContent = statusMessages[msgIndex];
-    }, 1400);
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      progressText.textContent = files.length === 1
+        ? 'Reading morphological features…'
+        : `Identifying specimen ${i + 1} of ${files.length}…`;
 
-    try {
-      const formData = new FormData();
-      formData.append('file', currentFile);
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
 
-      const resp = await fetch(`${API_URL}/predict`, {
-        method: 'POST',
-        body: formData
-      });
+        const resp = await fetch(`${API_URL}/predict`, { method: 'POST', body: formData });
+        if (!resp.ok) throw new Error(`Server returned ${resp.status}`);
 
-      if (!resp.ok) {
-        throw new Error(`Server returned ${resp.status}`);
+        const data = await resp.json();
+        renderSpecimen(data, file, false);
+
+      } catch (err) {
+        renderSpecimen(null, file, true, err.message);
       }
-
-      const data = await resp.json();
-      renderResult(data);
-
-    } catch (err) {
-      errorBox.textContent = `Identification failed: ${err.message}. The API may be cold-starting — wait a few seconds and try again.`;
-      errorBox.classList.add('show');
-    } finally {
-      clearInterval(msgInterval);
-      statusEl.classList.remove('show');
-      identifyBtn.disabled = false;
     }
+
+    progress.classList.remove('show');
+    identifyBtn.disabled = false;
+    clearBtn.disabled = false;
   });
 
   function formatSpeciesName(raw) {
-    // "anopheles_arabiensis" -> { genus: "Anopheles", species: "arabiensis" }
     const parts = raw.split('_');
     const genus = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
     const species = parts.slice(1).join(' ');
     return { genus, species, full: `${genus} ${species}` };
   }
 
-  function renderResult(data) {
-    const name = formatSpeciesName(data.species);
+  function renderSpecimen(data, file, failed, errMsg) {
+    const card = document.createElement('div');
+    card.className = 'specimen' + (failed ? ' failed' : '');
 
-    document.getElementById('speciesName').textContent = name.full;
-    document.getElementById('speciesGenus').textContent = `Genus ${name.genus} · Culicidae`;
-    document.getElementById('sexValue').textContent = data.sex;
-    document.getElementById('speciesConf').textContent = `${Math.round(data.species_confidence * 100)}%`;
-    document.getElementById('specimenTime').textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    const inner = document.createElement('div');
+    inner.className = 'specimen-inner';
 
-    document.getElementById('sexBar').style.width = `${Math.round(data.sex_confidence * 100)}%`;
-    document.getElementById('speciesBar').style.width = `${Math.round(data.species_confidence * 100)}%`;
+    const thumb = document.createElement('img');
+    thumb.className = 'specimen-thumb';
+    thumb.alt = file.name;
+    const reader = new FileReader();
+    reader.onload = e => { thumb.src = e.target.result; };
+    reader.readAsDataURL(file);
 
-    const sorted = Object.entries(data.species_all_probs || {})
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5);
+    const body = document.createElement('div');
+    body.className = 'specimen-body';
 
-    const list = document.getElementById('breakdownList');
-    list.innerHTML = '';
-    sorted.forEach(([species, prob], i) => {
-      const formatted = formatSpeciesName(species);
-      const row = document.createElement('div');
-      row.className = 'breakdown-row' + (i === 0 ? ' top' : '');
-      row.innerHTML = `
-        <div class="breakdown-name">${formatted.full}</div>
-        <div class="breakdown-track"><div class="breakdown-fill" style="width:${Math.round(prob*100)}%"></div></div>
-        <div class="breakdown-pct">${Math.round(prob*100)}%</div>
+    if (failed) {
+      body.innerHTML = `
+        <div class="specimen-row">
+          <div class="specimen-eyebrow">Could not identify</div>
+          <div class="specimen-file">${file.name}</div>
+        </div>
+        <div class="species-name" style="font-size:20px;">—</div>
+        <div class="fail-msg">${errMsg}. The service may be starting up — try again in a few seconds.</div>
       `;
-      list.appendChild(row);
-    });
+    } else {
+      const name = formatSpeciesName(data.species);
+      const speciesPct = Math.round(data.species_confidence * 100);
+      const sexPct = Math.round(data.sex_confidence * 100);
 
-    specimen.classList.add('show');
+      const sorted = Object.entries(data.species_all_probs || {})
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 4);
+
+      const breakdownHTML = sorted.map(([sp, prob], i) => {
+        const f = formatSpeciesName(sp);
+        return `
+          <div class="breakdown-row${i === 0 ? ' top' : ''}">
+            <div class="breakdown-name">${f.full}</div>
+            <div class="breakdown-track"><div class="breakdown-fill" style="width:${Math.round(prob*100)}%"></div></div>
+            <div class="breakdown-pct">${Math.round(prob*100)}%</div>
+          </div>`;
+      }).join('');
+
+      body.innerHTML = `
+        <div class="specimen-row">
+          <div class="specimen-eyebrow">Identification</div>
+          <div class="specimen-file">${file.name}</div>
+        </div>
+        <div class="species-name">${name.full}</div>
+        <div class="species-genus">Genus ${name.genus} · Culicidae</div>
+
+        <div class="fields">
+          <div>
+            <div class="field-label">Sex</div>
+            <div class="field-value">${data.sex}</div>
+            <div class="conf-bar-track">
+              <div class="conf-bar-fill${sexPct < 70 ? ' low' : ''}" style="width:${sexPct}%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="field-label">Species confidence</div>
+            <div class="field-value">${speciesPct}%</div>
+            <div class="conf-bar-track">
+              <div class="conf-bar-fill${speciesPct < 70 ? ' low' : ''}" style="width:${speciesPct}%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="breakdown">
+          <div class="breakdown-title">Full species probability</div>
+          ${breakdownHTML}
+        </div>
+      `;
+    }
+
+    inner.appendChild(thumb);
+    inner.appendChild(body);
+    card.appendChild(inner);
+    results.appendChild(card);
   }
 </script>
 </body>
