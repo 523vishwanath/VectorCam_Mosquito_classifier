@@ -18,12 +18,15 @@
 </p>
 
 <p align="center">
-  <a href="https://523vishwanath.github.io/VectorCam_Mosquito_classifier/">
+  
     <img src="results/demo.gif" width="760" alt="VectorID live demo">
-  </a>
+
   <br>
   <sub><i>&uarr; VectorID running live &mdash; click to try it yourself</i></sub>
 </p>
+
+
+
 
 <p align="center">
   <img src="results/webapp_screenshot.png" width="760" alt="VectorID web app result">
