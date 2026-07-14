@@ -18,9 +18,7 @@
 </p>
 
 <p align="center">
-  
-    <img src="results/demo.gif" width="760" alt="VectorID live demo">
-
+  <img src="results/demo.gif" width="760" alt="VectorID live demo">
   <br>
   <sub><i>&uarr; VectorID running live &mdash; click to try it yourself</i></sub>
 </p>
