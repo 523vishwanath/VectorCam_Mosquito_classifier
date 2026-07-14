@@ -26,6 +26,12 @@
 </p>
 
 <p align="center">
+  <img src="results/webapp_screenshot.png" width="760" alt="VectorID web app result">
+  <br>
+  <sub><i>A specimen identified in the VectorID web app</i></sub>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/species_acc-89.4%25-2ea043">
   <img src="https://img.shields.io/badge/sex_acc-92.6%25-2ea043">
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white">
